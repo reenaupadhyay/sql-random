@@ -20,3 +20,34 @@ BEGIN
 END;
 /
 
+
+import pandas as pd
+import fastavro
+from fastavro.schema import load_schema
+
+# Example DataFrame
+data = {
+    'column1': [1, 2, 3],
+    'column2': ['A', 'B', 'C'],
+    'column3': [True, False, True]
+}
+
+df = pd.DataFrame(data)
+
+# Define Avro schema
+schema = {
+    "type": "record",
+    "name": "ExampleRecord",
+    "fields": [
+        {"name": "column1", "type": "int"},
+        {"name": "column2", "type": "string"},
+        {"name": "column3", "type": "boolean"}
+    ]
+}
+
+# Convert DataFrame to Avro records
+records = df.to_dict('records')
+
+# Write Avro file
+with open('output.avro', 'wb') as out:
+    fastavro.writer(out, schema, records)
