@@ -1,0 +1,22 @@
+Test file
+
+DECLARE
+    v_sql   VARCHAR2(4000);
+    v_count NUMBER;
+BEGIN
+    FOR col IN (
+        SELECT column_name
+        FROM all_tab_columns
+        WHERE table_name = 'YOUR_TABLE_NAME'
+        AND owner = 'YOUR_SCHEMA_NAME'
+    ) LOOP
+        v_sql := 'SELECT COUNT(1) FROM ' || col.table_name || ' WHERE ' || col.column_name || ' IS NOT NULL';
+        EXECUTE IMMEDIATE v_sql INTO v_count;
+        
+        IF v_count = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(col.column_name || ' has only NULL values');
+        END IF;
+    END LOOP;
+END;
+/
+
