@@ -22,6 +22,11 @@ END;
 
 java.lang.NoSuchMethodError: com.mongodb.client.MongoDatabase.listCollectionNames()”. 
 
+mongodb-driver-core - org.mongodb:mongodb-driver-core:jar:5.0.1
+spring-data-mongodb - org.springframework.data:spring-data-mongodb:jar:3.3.4
+mongodb-driver-sync - org.mongodb:mongodb-driver-sync:jar:5.0.1
+
+
 import pandas as pd
 import fastavro
 from fastavro.schema import load_schema
